@@ -11,14 +11,16 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="{%  static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%  static '/css/main.css' %}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
 
     <title>Artista</title>
 </head>
 <body>
-{% include 'Shop/navbar.html' %}
+
+{% if not '/signin/' in request.path %}{% include 'Shop/navbar.html' %}{% endif %}
+
 
 
 <div class="container">
