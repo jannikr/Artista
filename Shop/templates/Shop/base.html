@@ -19,7 +19,7 @@
 </head>
 <body>
 
-{% if not '/signin/' in request.path %}{% include 'Shop/navbar.html' %}{% endif %}
+{% if '/signin/' not in request.path and '/signup/' not in request.path%}{% include 'Shop/navbar.html' %}{% endif %}
 
 
 
