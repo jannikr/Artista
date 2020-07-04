@@ -4,15 +4,16 @@
 {% block content %}
 
     <div class="wrapper">
-        <form class="form-signin">
+        <form method="post" class="form-signin">
+            {% csrf_token %}
             <h2 class="form-signin-heading text-center">Anmelden</h2>
-            <input type="text" class="form-control" name="username" placeholder="Email Adresse" required="" autofocus=""/>
-            <input type="password" class="form-control" name="passord" placeholder="Passwort" required=""/>
+            <input type="text" class="form-control" name="username" placeholder="Nutzername" required="" autofocus=""/>
+            <input type="password" class="form-control" name="password" placeholder="Passwort" required=""/>
             <label class="checkbox">
                 <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                 Eingeloggt bleiben?
             </label>
-            <button class="btn btn-lg btn-primary btn-block" id="textCheckbox">Anmelden</button>
+            <button class="btn btn-lg btn-primary btn-block" id="textCheckbox" type="submit">Anmelden</button>
             <hr>
             <label>
                 Noch kein Konto? <a href="{% url 'signup' %}">Hier registrieren.</a>

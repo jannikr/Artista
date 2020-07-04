@@ -23,12 +23,21 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item px-3">
+      <li class="nav-item">
           <a class="btn btn-outline-primary" href="{% url 'cart' %}"><i class="fa fa fa-shopping-cart fa-sm"></i> Cart | 0</a>
       </li>
-      <li>
-      <a class="btn btn-warning" href="{% url 'signin' %}">Anmelden</a>
+      {% if user.is_authenticated or shopuser.is_authenticated %}
+      <li class="nav-item px-3">
+        <a class="btn btn-outline-primary" href="#"><i class="fa fa fa-plus-circle fa-sm"></i> Bild hochladen</a>
       </li>
+      <li>
+        <a class="btn btn-warning ml-3" href="{% url 'logout' %}">Abmelden</a>
+      </li>
+      {% else %}
+      <li>
+        <a class="btn btn-warning ml-3" href="{% url 'login' %}">Anmelden</a>
+      </li>
+      {% endif %}
     </ul>
   </div>
 </div>

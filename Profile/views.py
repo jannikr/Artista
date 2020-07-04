@@ -7,7 +7,7 @@ def profile(request):
 
 def signin(request):
     context = {}
-    return render(request, 'Profile/signin.html', context)
+    return render(request, 'Profile/login.html', context)
 
 def signup(request):
     context = {}
