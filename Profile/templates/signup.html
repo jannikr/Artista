@@ -1,0 +1,27 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <form method="post" enctype="multipart/form-data" class="form-signin">
+            {% csrf_token %}
+            <h2 class="form-signin-heading text-center">Registrieren</h2>
+            <input type="text" class="form-control" name="first_name" placeholder="Vorname" required="" autofocus=""/>
+            <input type="text" class="form-control" name="last_name" placeholder="Nachname" autofocus=""/>
+            <input type="text" class="form-control" name="username" placeholder="username" required="" autofocus=""/>
+            <input type="text" class="form-control" name="email" placeholder="email" required="" autofocus=""/>
+            <input type="text" class="form-control" name="instagram_handle" placeholder="@yourinstagramname" autofocus=""/>
+            <hr>
+            <input type="password" class="form-control" name="password1" id="id_password1" placeholder="Passwort" autocomplete="new-password" required=""/>
+            <input type="password" class="form-control" name="password2" id="id_password2" placeholder="Passwort wiederholen" autocomplete="new-password" required=""/>
+            <label class="checkbox">
+                <input type="checkbox" value="conditons" id="conditions" name="conditions" required="">
+                Ich akzeptiere die <a href="#">Bedingungen</a>.
+            </label>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" id="textCheckbox">Registrieren</button>
+        </form>
+    </div>
+
+
+{% endblock content %}

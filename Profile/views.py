@@ -1,14 +1,12 @@
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.views import generic
+from django.views.generic.base import TemplateView
+from .forms import ShopUserCreationForm
 
 # Create your views here.
-def profile(request):
-    context = {}
-    return render(request, 'Profile/profile.html', context)
-
-def signin(request):
-    context = {}
-    return render(request, 'Profile/login.html', context)
-
-def signup(request):
-    context = {}
-    return render(request,'Profile/signup.html', context)
+class MySignupView(generic.CreateView):
+    form_class = ShopUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
