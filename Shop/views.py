@@ -1,9 +1,15 @@
 from django.shortcuts import render
 
 # Create your views here.
-def home(request):
-    context = {}
-    return render(request, 'Shop/home.html', context)
+from django.views.generic import ListView
+
+from Shop.models import Product
+
+
+class ProductListView(ListView):
+    model = Product
+    context_object_name = 'all_the_products'
+    template_name = 'Shop/home.html'
 
 def cart(request):
     context = {}
