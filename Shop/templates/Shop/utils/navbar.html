@@ -30,9 +30,16 @@
       <li class="nav-item px-3">
         <a class="btn btn-outline-primary" href="#"><i class="fa fa fa-plus-circle fa-sm"></i> Bild hochladen</a>
       </li>
-      <li>
-        <a class="btn btn-warning ml-3" href="{% url 'logout' %}">Abmelden</a>
-      </li>
+        <div class="dropdown">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hallo, {{ user.username | title }}</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Konto</a>
+    <a class="dropdown-item" href="#">Bestellungen</a>
+    <a class="dropdown-item" href="#">Favoriten</a>
+                <hr>
+    <a class="dropdown-item" href="{% url 'logout' %}">Abmelden</a>
+  </div>
+</div>
       {% else %}
       <li>
         <a class="btn btn-warning ml-3" href="{% url 'login' %}">Anmelden</a>
