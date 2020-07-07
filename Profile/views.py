@@ -3,7 +3,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import ListView
 from django.views.generic.base import TemplateView
+
+from Shop.models import Product
 from .forms import ShopUserCreationForm
 
 # Create your views here.
@@ -12,6 +15,7 @@ class MySignupView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
-def user(request):
-    context = {}
-    return render(request, 'profile.html', context)
+class UserListView(ListView):
+    model = Product
+    context_object_name = 'all_the_products'
+    template_name = 'profile.html'

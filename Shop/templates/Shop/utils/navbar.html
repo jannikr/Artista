@@ -33,7 +33,7 @@
         <div class="dropdown">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hallo, {{ user.username | title }}</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Konto</a>
+                <a class="dropdown-item" href="{% url 'user' %}">Konto</a>
     <a class="dropdown-item" href="#">Bestellungen</a>
     <a class="dropdown-item" href="#">Favoriten</a>
                 <hr>

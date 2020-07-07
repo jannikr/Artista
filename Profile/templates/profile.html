@@ -2,5 +2,54 @@
 {% load static %}
 
 {% block content %}
-    <h1>Profile Page</h1>
-{% endblock content %}>
+    <div class="container">
+        <div class="card mb-3 mt-4">
+            <div class="row no-gutters">
+                <div class="col-md-2">
+                    {% if user.profile_picture.url %}
+                        <img src="{{ user.profile_picture.url }}" class="card-img img-circle" alt="...">
+                    {% else %}
+                        <!-- Replace with static image if the user has no picture uploaded -->
+                        <img src="{% static '/images/jumbotron.jpg' %}" class="card-img img-circle" alt="...">
+                    {% endif %}
+                </div>
+                <div class="col-md-8 boxtext">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.username | title }}</h5>
+                        <p class="card-text"><small class="text-muted"><strong>Email:</strong> {{ user.email }}<br><strong>Instagram: </strong>{{ user.instagram_handle }}</small><br>
+                            <a href="#">bearbeiten</a></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card-body">
+                <p class="card-text"><i class="fa fa fa-location-arrow fa-sm"></i><strong>&nbsp  Adresse:</strong> Musterstraße 1, Musterstadt, Deutschland &nbsp <a href="#">bearbeiten</a></p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col infos">
+                            <strong>0</strong>
+                            <br>
+                            <br>
+                            Bestellungen
+                        </div>
+                        <div class="col infos">
+                            <strong>2</strong>
+                            <br>
+                            <br>
+                            Warenkorb
+                        </div>
+                        <div class="col infos">
+                            <strong>4</strong>
+                            <br>
+                            <br>
+                            Wunschzettel
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>Deine Produkte</h2>
+    </div>
+    <!-- Hier noch filtern nach Produkten nur von dem User -->
+    {% include 'Shop/utils/products.html' %}
+{% endblock content %}

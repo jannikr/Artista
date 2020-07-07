@@ -2,16 +2,17 @@
 {% load static %}
 
 {% block content %}
-
-    <section class="jumbotron text-center mt-4" style="background: url({% static '/images/jumbotron.jpg' %}) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;>
-        <div class="container">
-          <h1 class="jumbotron-heading">Neue Sommermotive!</h1>
-          <p class="lead text-muted">Ob klassisch oder neueste Trends - Artista schätzt die Arbeit der Künstler. </p>
-          <p>
+    <div class="container">
+        <section class="jumbotron text-center mt-4" style="background: url({% static '/images/jumbotron.jpg' %}) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover">
+                <div class="container">
+        <h1 class="jumbotron-heading">Neue Sommermotive!</h1>
+        <p class="lead text-muted">Ob klassisch oder neueste Trends - Artista schätzt die Arbeit der Künstler. </p>
+        <p>
             <a href="#" class="btn btn-secondary my-2">Sommermotive durchstöbern</a>
-          </p>
-        </div>
-      </section>
+        </p>
+    </div>
+    </section>
+    </div>
 
     {% include 'Shop/utils/products.html' %}
 
