@@ -2,35 +2,37 @@
 {% load static %}
 
 {% block content %}
-    <div class="row product-details mt-4 mb-4">
-        <div class="col-sm">
-            <img class="product-image" src="{{ that_one_product.image.url }}">
-        </div>
-        <div class="col-sm">
-
-            <h1>{{ that_one_product.title }}</h1>
-            <h2 class="text-muted">Kategorie: {{ that_one_product.get_category_display }}</h2>
-            <p><i class="fas fa fa-user fa-sm"></i>
-                {{ that_one_product.creator.instagram_handle }}</p>
-            <div class="rating">
-                <div class="stars">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <span class="review-no">41 reviews</span>
+    <div class="container">
+        <div class="row product-details mt-4 mb-4">
+            <div class="col-sm">
+                <img class="product-image" src="{{ that_one_product.image.url }}">
             </div>
-            <p class="text-muted">{{ that_one_product.price }}€</p>
+            <div class="col-sm">
 
-            <div class="d-flex">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
+                <h1>{{ that_one_product.title }}</h1>
+                <h2 class="text-muted">Kategorie: {{ that_one_product.get_category_display }}</h2>
+                <p><i class="fas fa fa-user fa-sm"></i>
+                    {{ that_one_product.creator.instagram_handle }}</p>
+                <div class="rating">
+                    <div class="stars">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <span class="review-no">41 reviews</span>
+                </div>
+                <p class="text-muted">{{ that_one_product.price }}€</p>
+
+                <div class="d-flex">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <input type="text" class="form-control mt-4" name="review" placeholder="Rezension" required="" autofocus=""/>
+    <input type="text" class="form-control mt-4 mb-4" name="review" placeholder="Rezension" required="" autofocus=""/>
     </div>
 {% endblock content %}
