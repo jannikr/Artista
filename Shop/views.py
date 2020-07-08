@@ -19,6 +19,8 @@ def checkout(request):
     context = {}
     return render(request, 'Shop/checkout.html', context)
 
-def detail(request):
-    context = {}
+def detail(request, **kwargs):
+    product_id = kwargs['pk']
+    that_one_product = Product.objects.get(id=product_id)
+    context = {'that_one_product': that_one_product}
     return render(request, 'Shop/detail.html', context)

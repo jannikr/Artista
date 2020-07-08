@@ -22,13 +22,11 @@
 {% if '/login/' not in request.path %}{% include 'Shop/utils/navbar.html' %}{% endif %}
 
 
-
-
 {% block content %}
 
 {% endblock content %}
 
-
+{% if '/login/' not in request.path %}{% include 'Shop/utils/footer.html' %}{% endif %}
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 

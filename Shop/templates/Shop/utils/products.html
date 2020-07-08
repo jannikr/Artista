@@ -5,7 +5,7 @@
             {% for product in all_the_products %}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                        <a href="detail/{{ product.id }}/"><img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap"></a>
                         <div class="card-body">
                             <h5 class="card-title">{{ product.title }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ product.get_category_display }}</h6>
@@ -13,7 +13,7 @@
                                 {{ product.creator.instagram_handle }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ansehen</button>
+                                    <a href="detail/{{ product.id }}/"><button type="button" class="btn btn-sm btn-outline-secondary">Ansehen</button></a>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
                                 </div>

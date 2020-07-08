@@ -110,6 +110,10 @@
     border: 1px solid rgba(86, 61, 124, .2);
 }
 
+footer {
+    padding-top: 40px;
+}
+
 @media only screen and (min-width: 993px) {
 
   .boxtext {
