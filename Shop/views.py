@@ -15,6 +15,10 @@ def cart(request):
     context = {}
     return render(request, 'Shop/cart.html', context)
 
+def upload(request):
+    context = {}
+    return render(request, 'Shop/upload.html', context)
+
 def checkout(request):
     context = {}
     return render(request, 'Shop/checkout.html', context)
