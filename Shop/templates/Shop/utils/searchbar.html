@@ -1,0 +1,31 @@
+{% load static %}
+
+<script type="text/javascript">
+    function myFunction() {
+        var element = document.getElementById("myDropdown");
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+</script>
+
+<div class="wrapper-search d-flex justify-content-center">
+    <div class="search-box">
+        <div class="dropdown" onclick="myFunction()">
+            <div class="default_option">Alle</div>
+            <ul id="myDropdown">
+                <li>Alle</li>
+                <li>Titel</li>
+                <li>Beschreibung</li>
+                <li>Bewertung</li>
+                <li>Instagram Name</li>
+            </ul>
+        </div>
+        <div class="search_field">
+            <input type="text" class="input" placeholder="Suchen...">
+            <i class="fa fa fa-search"></i>
+        </div>
+    </div>
+</div>
