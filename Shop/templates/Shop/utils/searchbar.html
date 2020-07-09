@@ -9,18 +9,25 @@
             element.style.display = "none";
         }
     }
+
+    function clickedItem(e) {
+        var targetName = e.target.innerText;
+        var element = document.getElementById("default_value");
+        element.innerText = targetName;
+
+    }
 </script>
 
 <div class="wrapper-search d-flex justify-content-center">
     <div class="search-box">
         <div class="dropdown" onclick="myFunction()">
-            <div class="default_option">Alle</div>
+            <div class="default_option" id="default_value">Alle</div>
             <ul id="myDropdown">
-                <li>Alle</li>
-                <li>Titel</li>
-                <li>Beschreibung</li>
-                <li>Bewertung</li>
-                <li>Instagram Name</li>
+                <li onclick="clickedItem(event)">Alle</li>
+                <li onclick="clickedItem(event)">Titel</li>
+                <li onclick="clickedItem(event)">Beschreibung</li>
+                <li onclick="clickedItem(event)">Bewertung</li>
+                <li onclick="clickedItem(event)">Instagram Name</li>
             </ul>
         </div>
         <div class="search_field">
@@ -29,3 +36,13 @@
         </div>
     </div>
 </div>
+
+<!-- This form works fine for testing!
+<br>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+-->
