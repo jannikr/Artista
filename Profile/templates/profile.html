@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% if user.is_authenticated  %}
     <div class="container">
         <div class="card mb-3 mt-4">
             <div class="row no-gutters">
@@ -52,4 +53,13 @@
     </div>
     <!-- Hier noch filtern nach Produkten nur von dem User -->
     {% include 'Shop/utils/products.html' %}
+    {% else %}
+    <div class="container d-flex justify-content-center mt-5 mb-5">
+          <div class="starter-template">
+        <h1>Kein Zugriff!</h1>
+        <p class="lead">Melde dich bitte an um diese Seite aufrufen zu können.</p>
+      </div>
+    </div>
+
+            {% endif %}
 {% endblock content %}
