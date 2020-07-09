@@ -1,47 +1,52 @@
 {% load static %}
 <footer class="section-footer border-top">
-	<div class="container">
-		<section class="footer-top padding-y">
-			<div class="row">
-				<aside class="col-md-6">
-					<article class="mr-3">
-						<img src="http://127.0.0.1:8000/static/images/Artista_Logo.png" class="logo-footer">
-						<p class="mt-3">Some short text about company like You might remember the Dell computer commercials in which a youth reports this exciting news to his friends.</p>
-					</article>
-				</aside>
-				<aside class="col-sm-3 col-md-2">
-					<h6 class="title">About</h6>
-					<ul class="list-unstyled">
-						<li> <a href="#">About us</a></li>
-						<li> <a href="#">Services</a></li>
-						<li> <a href="#">Rules and terms</a></li>
-						<li> <a href="#">Blogs</a></li>
-					</ul>
-				</aside>
-				<aside class="col-sm-3 col-md-2">
-					<h6 class="title">Services</h6>
-					<ul class="list-unstyled">
-						<li> <a href="#">Help center</a></li>
-						<li> <a href="#">Money refund</a></li>
-						<li> <a href="#">Terms and Policy</a></li>
-						<li> <a href="#">Open dispute</a></li>
-					</ul>
-				</aside>
-				<aside class="col-sm-3  col-md-2">
-					<h6 class="title">For users</h6>
-					<ul class="list-unstyled">
-						<li> <a href="#"> User Login </a></li>
-						<li> <a href="#"> User register </a></li>
-						<li> <a href="#"> Account Setting </a></li>
-						<li> <a href="#"> My Orders </a></li>
-						<li> <a href="#"> My Wishlist </a></li>
-					</ul>
-				</aside>
-			</div> <!-- row.// -->
-		</section>	<!-- footer-top.// -->
+    <div class="container">
+        <section class="footer-top padding-y">
+            <div class="row">
+                <aside class="col-md-6">
+                    <article class="mr-3">
+                        <img src="http://127.0.0.1:8000/static/images/Artista_Logo.png" class="logo-footer">
+                        <p class="mt-3">Ob klassisch oder neueste Trends - Artista schätzt die Arbeit der Künstler. Werde Teil einer großen Gruppe von Künstlern auf Artista und mache deinen Followern eine Freude!</p>
+                    </article>
+                </aside>
+                <aside class="col-sm-3 col-md-2">
+                    <h6 class="title">About</h6>
+                    <ul class="list-unstyled">
+                        <li> <a href="#">*Über uns</a></li>
+                        <li> <a href="#">*Bestseller</a></li>
+                        <li> <a href="#">*Neuheiten</a></li>
+                        <li> <a href="#">*Blog</a></li>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3 col-md-2">
+                    <h6 class="title">Service</h6>
+                    <ul class="list-unstyled">
+                        <li> <a href="#">*FAQ</a></li>
+                        <li> <a href="#">*Rückerstattung</a></li>
+                        <li> <a href="#">*AGB</a></li>
+                        <li> <a href="#">*Impressum</a></li>
+                    </ul>
+                </aside>
+                <aside class="col-sm-3  col-md-2">
+                    <h6 class="title">Nutzer</h6>
+                    <ul class="list-unstyled">
+                        {% if user.is_authenticated or shopuser.is_authenticated %}
+                            <li> <a href="{% url 'user' %}">Konto</a></li>
+                            <li> <a href="{% url 'upload' %}">Bild hochladen</a></li>
+                            <li> <a href="#">*Meine Bestellungen</a></li>
+                            <li> <a href="#">*Meine Produkte</a></li>
+                            <li> <a href="{% url 'logout' %}">Ausloggen</a></li>
+                        {% else %}
+                            <li> <a href="{% url 'login' %}">Anmelden</a></li>
+                            <li> <a href="{% url 'signup' %}">Registrieren</a></li>
+                        {% endif %}
+                    </ul>
+                </aside>
+            </div> <!-- row.// -->
+        </section>	<!-- footer-top.// -->
 
-		<section class="footer-copyright border-top">
-				<p class="float-left text-muted"> © 2019 Artista  All rights resetved </p>
-		</section>
-	</div><!-- //container -->
+        <section class="footer-copyright border-top">
+            <p class="float-left text-muted"> © 2020 Artista  All rights resetved </p>
+        </section>
+    </div><!-- //container -->
 </footer>
