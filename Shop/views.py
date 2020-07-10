@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
-from .forms import SearchForm
+from .forms import SearchForm, ProductForm
 from Shop.models import Product
 
 
@@ -49,9 +50,16 @@ def cart(request):
     context = {}
     return render(request, 'Shop/cart.html', context)
 
-def upload(request):
-    context = {}
-    return render(request, 'Shop/upload.html', context)
+class ProductCreateView(CreateView):
+    print('Hello')
+    model = Product
+    form_class = ProductForm
+    template_name = 'Shop/upload.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 def checkout(request):
     context = {}

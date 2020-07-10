@@ -1,5 +1,4 @@
 from django import forms
-
 from Shop.models import Product
 
 
@@ -8,4 +7,13 @@ class SearchForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['title', ]
+        fields = ['title']
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['title', 'description', 'price', 'image', 'category']
+        widgets = {
+            'creator': forms.HiddenInput(),
+        }

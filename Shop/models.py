@@ -17,8 +17,8 @@ class Product(models.Model):
     price = models.FloatField()
     creator = models.ForeignKey(ShopUser,
                                 on_delete=models.CASCADE,
-                                related_name='shopusers',
-                                related_query_name='shopuser')
+                                related_name='user',
+                                related_query_name='users')
     image = models.ImageField(null=True)
     category = models.CharField(max_length=1,
                                 choices=PRODUCT_CATEGORIES,
