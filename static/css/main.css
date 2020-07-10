@@ -234,3 +234,32 @@ footer {
 ::-ms-input-placeholder {
     color: #9fa3b1;
 }
+
+/* product detail */
+
+#summary {
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: justify
+}
+
+#summary p.collapse:not(.show) {
+    height: 42px !important;
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+#summary p.collapsing {
+    min-height: 42px !important;
+}
+
+#summary a.collapsed:after  {
+    content: '+ Mehr lesen';
+}
+
+#summary a:not(.collapsed):after {
+    content: '- Weniger anzeigen';
+}

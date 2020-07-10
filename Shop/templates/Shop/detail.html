@@ -23,7 +23,12 @@
                     </div>
                     <span class="review-no">41 reviews</span>
                 </div>
-                <p class="text-muted">{{ that_one_product.price }}€</p>
+                <div id="summary">
+        <p class="collapse text-muted" id="collapseSummary">{{ that_one_product.description }}</p>
+        <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary"></a>
+      </div>
+                <br>
+                <p>{{ that_one_product.price }}€</p>
 
                 <div class="d-flex">
                     <div class="btn-group">
