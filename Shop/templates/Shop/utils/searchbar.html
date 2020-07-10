@@ -14,6 +14,8 @@
         var targetName = e.target.innerText;
         var element = document.getElementById("default_value");
         element.innerText = targetName;
+        var input = document.getElementById("myCategory");
+        input.setAttribute("value", String(targetName));
 
     }
 </script>
@@ -21,19 +23,20 @@
 <div class="wrapper-search d-flex justify-content-center">
     <div class="search-box">
         <div class="dropdown" onclick="myFunction()">
-            <div class="default_option" id="default_value">Alle</div>
+            <div class="default_option" id="default_value">Titel</div>
             <ul id="myDropdown">
-                <li onclick="clickedItem(event)">Alle</li>
                 <li onclick="clickedItem(event)">Titel</li>
                 <li onclick="clickedItem(event)">Beschreibung</li>
                 <li onclick="clickedItem(event)">Bewertung</li>
                 <li onclick="clickedItem(event)">Instagram Name</li>
             </ul>
         </div>
-        <div class="search_field">
-            <input type="text" class="input" placeholder="Suchen...">
-            <i class="fa fa fa-search"></i>
-        </div>
+        <form method="post" class="search_field">
+            {% csrf_token %}
+            <input type="text" class="input" name="title" placeholder="Suchen...">
+            <input type="hidden" id="myCategory" value="Titel" maxlength="100" class="form-control" name="myCategory"/>
+            <i class="fa fa fa-search" onclick="this.parentNode.submit();"></i>
+        </form>
     </div>
 </div>
 

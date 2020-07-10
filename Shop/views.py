@@ -10,8 +10,25 @@ from Shop.models import Product
 def home(request):
     if request.method == 'POST':
         search_string_text = request.POST['title']
-        products_found = Product.objects.filter(title__contains=search_string_text)
-        print(products_found)
+        search_string_category = request.POST['myCategory']
+
+        if search_string_category == "Titel":
+            products_found = Product.objects.filter(title__contains=search_string_text)
+        elif search_string_category == "Beschreibung":
+            products_found = Product.objects.filter(description__contains=search_string_text)
+        elif search_string_category == "Bewertung":
+            # To Do
+            products_found = Product.objects.filter(title__contains=search_string_text)
+            print("-------------------------------------------------")
+            print("IMPORTANT:")
+            print("Rate function not implemented yet: Shop/views.py")
+            print("-------------------------------------------------")
+        elif search_string_category == "Instagram Name":
+            if '@' in search_string_text:
+                products_found = Product.objects.filter(creator__instagram_handle__contains=search_string_text)
+            else:
+                products_found = Product.objects.filter(creator__instagram_handle__contains='@' + search_string_text)
+
 
         form_in_function_based_view = SearchForm()
         context = {'form': form_in_function_based_view,
