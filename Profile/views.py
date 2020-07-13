@@ -16,6 +16,8 @@ class MySignupView(generic.CreateView):
     template_name = 'signup.html'
 
 class UserListView(ListView):
+    # maybe change to function based view and filter products only from self.user
+    # products = Product.objects.filter(product=all_the_products__contains__creator_id...)
     model = Product
     context_object_name = 'all_the_products'
     template_name = 'profile.html'

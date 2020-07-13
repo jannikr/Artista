@@ -24,9 +24,9 @@
                     <span class="review-no">41 reviews</span>
                 </div>
                 <div id="summary">
-        <p class="collapse text-muted" id="collapseSummary">{{ that_one_product.description }}</p>
-        <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary"></a>
-      </div>
+                    <p class="collapse text-muted" id="collapseSummary">{{ that_one_product.description }}</p>
+                    <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary"></a>
+                </div>
                 <br>
                 <p>{{ that_one_product.price }}€</p>
 
@@ -41,15 +41,38 @@
     </div>
     <div class="album py-1 bg-light">
         <div class="container">
-            <div class="wrapper-search d-flex justify-content-center">
-                <div class="search-box">
-                    <div class="search_field">
-                        <input type="text" class="input" placeholder="Rezension...">
-                        <i class="fa fa fa-send"></i>
-                    </div>
-                </div>
+            <h5 class="mt-4">Schreibe einen Kommentar zu diesem Produkt:</h5>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name="text" required class="form-control" id="comment_id" rows="3"></textarea>
             </div>
+            <button class="btn btn-primary mb-4" type="submit">Abschicken</button>
+        </form>
         </div>
     </div>
+
+    <div class="container">
+    <h5 class="mt-4">Kommentare:</h5>
+                        {% for comment in comments_for_that_one_product %}
+            <div class="media comment-box">
+                <div class="media-left">
+                    <a href="#">
+                        <!-- Please check if user has its own profile picture!! -->
+                        <!-- <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"> -->
+                        <img class="img-responsive user-photo" src="{{ comment.user.profile_picture.url }}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <p class="media-heading"><strong>{{ comment.user.username }}</strong> am {{ comment.timestamp }}</p>
+                    <p>{{ comment.text }}</p>
+
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
 
 {% endblock content %}

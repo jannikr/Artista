@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from .forms import SearchForm, ProductForm
-from Shop.models import Product
+from .forms import SearchForm, ProductForm, CommentForm
+from Shop.models import Product, Comment
 
 
 def home(request):
@@ -68,7 +68,21 @@ def checkout(request):
 def detail(request, **kwargs):
     product_id = kwargs['pk']
     that_one_product = Product.objects.get(id=product_id)
-    context = {'that_one_product': that_one_product}
+
+    # add comment
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        form.instance.user = request.user
+        form.instance.product = that_one_product
+        if form.is_valid():
+            form.save()
+        else:
+            print(form.errors)
+
+    comments = Comment.objects.filter(product=that_one_product)
+    context = {'that_one_product': that_one_product,
+               'comments_for_that_one_product': comments,
+               'comment_form': CommentForm}
     return render(request, 'Shop/detail.html', context)
 
 def product_search(request):

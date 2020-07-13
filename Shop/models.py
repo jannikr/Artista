@@ -44,3 +44,27 @@ class Vote(models.Model):
 
     def __str__(self):
         return self.up_or_down + ' on ' + self.product.title + ' by ' + self.shopUser.username
+
+
+class Comment(models.Model):
+    text = models.TextField(max_length=500)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(ShopUser, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['timestamp']
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+    def get_comment_prefix(self):
+        if len(self.text) > 50:
+            return self.text[:50] + '...'
+        else:
+            return self.text
+
+    def __str__(self):
+        return self.get_comment_prefix() + ' (' + self.user.username + ')'
+
+    def __repr__(self):
+        return self.get_comment_prefix() + ' (' + self.user.username +  ' / ' + str(self.timestamp) + ')'
