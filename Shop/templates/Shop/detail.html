@@ -37,14 +37,20 @@
 
     }
 
-    function clickedItem(e) {
-        var targetName = e.target.innerText;
-        var element = document.getElementById("default_value");
-        element.innerText = targetName;
-        var input = document.getElementById("myCategory");
-        input.setAttribute("value", String(targetName));
+    function open() {
+        var elements = document.getElementsByClassName('fa-star');
+        counter = 0
+        for (element of elements) {
+            if (counter < {{ avg }}) {
+                element.setAttribute("style", "color:blue;");
+            }
+            counter++;
+            console.log(counter);
+        }
 
     }
+
+
 </script>
 
     <div class="container">
@@ -60,13 +66,15 @@
                     {{ that_one_product.creator.instagram_handle }}</p>
                 <div class="rating">
                     <div class="stars">
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="one-star" class="fa fa-star fa-star-checked"></span>
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="two-star" class="fa fa-star fa-star-checked"></span>
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="three-star" class="fa fa-star fa-star-checked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="one-star" class="fa fa-star fa-star-unchecked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="two-star" class="fa fa-star fa-star-unchecked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="three-star" class="fa fa-star fa-star-unchecked"></span>
                         <span onmouseover="hover(event)" onmouseout="leave()" id="four-star" class="fa fa-star fa-star-unchecked"></span>
                         <span onmouseover="hover(event)" onmouseout="leave()" id="five-star" class="fa fa-star fa-star-unchecked"></span>
                     </div>
-                    <span class="review-no">41 reviews</span>
+                    <span class="review-no">{{ number_of_votes }} Bewertung(en)</span>
+                    <p>AVG: {{ avg }}</p>
+
                 </div>
                 <div id="summary">
                     <p class="collapse text-muted" id="collapseSummary">{{ that_one_product.description }}</p>
@@ -118,6 +126,10 @@
         {% endfor %}
 
     </div>
+
+    <script type="text/javascript">
+    open()
+    </script>
 
 
 

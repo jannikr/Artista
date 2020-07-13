@@ -82,6 +82,8 @@ def detail(request, **kwargs):
     comments = Comment.objects.filter(product=that_one_product)
     context = {'that_one_product': that_one_product,
                'comments_for_that_one_product': comments,
+               'number_of_votes': that_one_product.get_number_of_votes(),
+               'avg': that_one_product.get_average(),
                'comment_form': CommentForm}
     return render(request, 'Shop/detail.html', context)
 
