@@ -8,5 +8,6 @@ urlpatterns = [
     path('upload/', views.ProductCreateView.as_view(), name="upload"),
     # path('detail/', views.detail, name="detail"),
     path('detail/<int:pk>/', views.detail, name='detail'),
-    path('detail/<int:pk>/vote/<str:rating>/', views.vote, name='product-vote')
+    path('detail/<int:pk>/vote/<str:rating>/', views.vote, name='product-vote'),
+    path('detail/<int:pk>/comment/<int:cid>/vote-comment/<str:up_or_down_or_flag>/', views.comment_vote, name='comment-vote'),
 ]

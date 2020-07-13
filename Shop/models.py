@@ -1,7 +1,6 @@
 from django.db import models
 from Profile.models import ShopUser
 
-
 # Create your models here.
 class Product(models.Model):
     PRODUCT_CATEGORIES = [
@@ -125,6 +124,7 @@ class Vote(models.Model):
         return self.rating + ' on ' + self.product.title + ' by ' + self.shopUser.username
 
 
+
 class Comment(models.Model):
     text = models.TextField(max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -142,8 +142,56 @@ class Comment(models.Model):
         else:
             return self.text
 
+    def get_downvotes(self):
+        downvotes = Vote_Comment.objects.filter(up_or_down_or_flag='D')
+        return downvotes
+
+    def get_downvotes_count(self):
+        return len(self.get_downvotes())
+
+    def get_upvotes(self):
+        upvotes = Vote_Comment.objects.filter(up_or_down_or_flag='U')
+        return upvotes
+
+    def get_upvotes_count(self):
+        return len(self.get_upvotes())
+
+    def get_flags(self):
+        flags = Vote_Comment.objects.filter(up_or_down_or_flag='F')
+        return flags
+
+    def get_flags_count(self):
+        return len(self.get_flags())
+
+    def vote(self, user, up_or_down_or_flag):
+        # To Do
+        # only one vote
+        vote = Vote_Comment.objects.create(up_or_down_or_flag=up_or_down_or_flag,
+                                       shopUser=user,
+                                       comment=self
+                                       )
+
+
     def __str__(self):
         return self.get_comment_prefix() + ' (' + self.user.username + ')'
 
     def __repr__(self):
         return self.get_comment_prefix() + ' (' + self.user.username + ' / ' + str(self.timestamp) + ')'
+
+
+class Vote_Comment(models.Model):
+    VOTE_TYPES = [
+        ('U', 'up'),
+        ('D', 'down'),
+        ('F', 'flag'),
+    ]
+
+    up_or_down_or_flag = models.CharField(max_length=1,
+                                  choices=VOTE_TYPES,null=True,
+                                  )
+    timestamp = models.DateTimeField(auto_now_add=True)
+    shopUser = models.ForeignKey(ShopUser, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return str(self.up_or_down_or_flag) + ' on ' + self.comment.get_comment_prefix() + ' by ' + self.shopUser.username

@@ -269,7 +269,7 @@ footer {
 .comment-box {
     margin-top: 10px !important;
 }
-/* CSS Test end */
+/* comment */
 
 .comment-box img {
     width: 50px;
@@ -305,6 +305,19 @@ footer {
     position: absolute;
     top: 10px;
     left: -6px;
+}
+
+.mycustom-report{
+    padding: 7px;
+    color: #bbbbbb;
+}
+
+.voting {
+    color: #bbbbbb;
+}
+
+.voting:hover {
+    color: #6f768d;
 }
 
 /* rating */

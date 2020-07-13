@@ -51,7 +51,6 @@ def cart(request):
     return render(request, 'Shop/cart.html', context)
 
 class ProductCreateView(CreateView):
-    print('Hello')
     model = Product
     form_class = ProductForm
     template_name = 'Shop/upload.html'
@@ -80,8 +79,24 @@ def detail(request, **kwargs):
             print(form.errors)
 
     comments = Comment.objects.filter(product=that_one_product)
+    comments_downvotes = 0
+    for comment in comments:
+        comments_downvotes = comment.get_downvotes_count()
+
+    comment_upvotes = 0
+    for comment in comments:
+        comments_upvotes = comment.get_upvotes_count()
+
+    comment_flags = 0
+    for comment in comments:
+        comments_flags = comment.get_flags_count()
+
+    # comment = Comment.objects.get(pk=1)
     context = {'that_one_product': that_one_product,
                'comments_for_that_one_product': comments,
+               'comments_downvotes': comments_downvotes,
+               'comments_upvotes': comments_upvotes,
+               'comments_flags': comments_flags,
                'number_of_votes': that_one_product.get_number_of_votes(),
                'avg': that_one_product.get_average(),
                'comment_form': CommentForm}
@@ -108,4 +123,11 @@ def vote(request, pk: str, rating: str):
     product = Product.objects.get(id=int(pk))
     user = request.user
     product.vote(user, rating)
+    return redirect('detail', pk=pk)
+
+def comment_vote(request, pk: int, cid:int, up_or_down_or_flag: str):
+    product = Product.objects.get(id=int(pk))
+    comment = Comment.objects.get(id=int(cid))
+    user = request.user
+    comment.vote(user, up_or_down_or_flag)
     return redirect('detail', pk=pk)
