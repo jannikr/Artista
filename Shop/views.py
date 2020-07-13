@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse_lazy
@@ -104,3 +104,8 @@ def product_search(request):
                    'show_results': False}
         return render(request, 'Shop/home.html', context)
 
+def vote(request, pk: str, rating: str):
+    product = Product.objects.get(id=int(pk))
+    user = request.user
+    product.vote(user, rating)
+    return redirect('detail', pk=pk)

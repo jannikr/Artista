@@ -89,6 +89,21 @@ class Product(models.Model):
     def get_number_of_votes(self):
         return(len(Vote.objects.filter(product=self)))
 
+    def vote(self, user, rating):
+        # when the user has not voted before
+        if not (len(Vote.objects.filter(shopUser=user, product=self)) > 0):
+            vote = Vote.objects.create(rating=rating,
+                                       shopUser=user,
+                                       product=self
+                                       )
+        # when the user voted before but with a different rating value
+        selectedUser = Vote.objects.filter(shopUser=user, product=self)
+        if not (str(rating) in str(selectedUser[0])):
+            # delete old value -> no duplicates
+            Vote.objects.get(shopUser=user, product=self).delete()
+            # create the new value
+            Vote.objects.create(rating=rating,shopUser=user,product=self)
+
 
 class Vote(models.Model):
     VOTE_TYPES = [

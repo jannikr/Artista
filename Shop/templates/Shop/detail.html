@@ -31,8 +31,15 @@
 
     function leave() {
         var elements = document.getElementsByClassName('fa-star');
+        counter = 0
         for (element of elements) {
-            element.setAttribute("style", "")
+            if (counter < {{ avg }}) {
+                element.setAttribute("style", "color:blue;");
+            } else {
+                element.setAttribute("style", "");
+            }
+            counter++;
+            console.log(counter);
         }
 
     }
@@ -66,14 +73,13 @@
                     {{ that_one_product.creator.instagram_handle }}</p>
                 <div class="rating">
                     <div class="stars">
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="one-star" class="fa fa-star fa-star-unchecked"></span>
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="two-star" class="fa fa-star fa-star-unchecked"></span>
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="three-star" class="fa fa-star fa-star-unchecked"></span>
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="four-star" class="fa fa-star fa-star-unchecked"></span>
-                        <span onmouseover="hover(event)" onmouseout="leave()" id="five-star" class="fa fa-star fa-star-unchecked"></span>
+                        <a href="vote/O/"><span onmouseover="hover(event)" onmouseout="leave()" id="one-star" class="fa fa-star fa-star-unchecked"></span></a>
+                        <a href="vote/TW/"><span onmouseover="hover(event)" onmouseout="leave()" id="two-star" class="fa fa-star fa-star-unchecked"></span></a>
+                        <a href="vote/TH/"><span onmouseover="hover(event)" onmouseout="leave()" id="three-star" class="fa fa-star fa-star-unchecked"></span></a>
+                        <a href="vote/FO/"><span onmouseover="hover(event)" onmouseout="leave()" id="four-star" class="fa fa-star fa-star-unchecked"></span></a>
+                        <a href="vote/FI/"><span onmouseover="hover(event)" onmouseout="leave()" id="five-star" class="fa fa-star fa-star-unchecked"></span></a>
+                        <span class="review-no text-muted"> {{ number_of_votes }} Bewertung(en)</span>
                     </div>
-                    <span class="review-no">{{ number_of_votes }} Bewertung(en)</span>
-                    <p>AVG: {{ avg }}</p>
 
                 </div>
                 <div id="summary">
@@ -128,7 +134,7 @@
     </div>
 
     <script type="text/javascript">
-    open()
+    window.onload = open;
     </script>
 
 
