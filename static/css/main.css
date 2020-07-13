@@ -306,3 +306,14 @@ footer {
     top: 10px;
     left: -6px;
 }
+
+/* rating */
+
+.fa-star-unchecked {
+    color:lightgrey;
+}
+
+.fa-star-checked {
+    color: #007bff;
+}
+

@@ -1,7 +1,52 @@
 {% extends 'Shop/base.html' %}
+
 {% load static %}
 
 {% block content %}
+
+    <script type="text/javascript">
+    function hover(e) {
+        if (e.target.id == "one-star") {
+            document.getElementById('one-star').setAttribute("style", "color: red");
+        } else if(e.target.id == "two-star") {
+            document.getElementById('one-star').setAttribute("style", "color: red");
+            document.getElementById('two-star').setAttribute("style", "color: red");
+        } else if (e.target.id == "three-star") {
+            document.getElementById('one-star').setAttribute("style", "color: red");
+            document.getElementById('two-star').setAttribute("style", "color: red");
+            document.getElementById('three-star').setAttribute("style", "color: red");
+        } else if (e.target.id == "four-star") {
+            document.getElementById('one-star').setAttribute("style", "color: red");
+            document.getElementById('two-star').setAttribute("style", "color: red");
+            document.getElementById('three-star').setAttribute("style", "color: red");
+            document.getElementById('four-star').setAttribute("style", "color: red");
+        } else if (e.target.id == "five-star") {
+            document.getElementById('one-star').setAttribute("style", "color: red");
+            document.getElementById('two-star').setAttribute("style", "color: red");
+            document.getElementById('three-star').setAttribute("style", "color: red");
+            document.getElementById('four-star').setAttribute("style", "color: red");
+            document.getElementById('five-star').setAttribute("style", "color: red");
+        }
+    }
+
+    function leave() {
+        var elements = document.getElementsByClassName('fa-star');
+        for (element of elements) {
+            element.setAttribute("style", "")
+        }
+
+    }
+
+    function clickedItem(e) {
+        var targetName = e.target.innerText;
+        var element = document.getElementById("default_value");
+        element.innerText = targetName;
+        var input = document.getElementById("myCategory");
+        input.setAttribute("value", String(targetName));
+
+    }
+</script>
+
     <div class="container">
         <div class="row product-details mt-4 mb-4">
             <div class="col-sm">
@@ -15,11 +60,11 @@
                     {{ that_one_product.creator.instagram_handle }}</p>
                 <div class="rating">
                     <div class="stars">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="one-star" class="fa fa-star fa-star-checked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="two-star" class="fa fa-star fa-star-checked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="three-star" class="fa fa-star fa-star-checked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="four-star" class="fa fa-star fa-star-unchecked"></span>
+                        <span onmouseover="hover(event)" onmouseout="leave()" id="five-star" class="fa fa-star fa-star-unchecked"></span>
                     </div>
                     <span class="review-no">41 reviews</span>
                 </div>
@@ -73,6 +118,7 @@
         {% endfor %}
 
     </div>
+
 
 
 {% endblock content %}
