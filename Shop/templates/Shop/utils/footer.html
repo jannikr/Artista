@@ -12,19 +12,19 @@
                 <aside class="col-sm-3 col-md-2">
                     <h6 class="title">About</h6>
                     <ul class="list-unstyled">
-                        <li> <a href="#">*Über uns</a></li>
-                        <li> <a href="#">*Bestseller</a></li>
-                        <li> <a href="#">*Neuheiten</a></li>
-                        <li> <a href="#">*Blog</a></li>
+                        <li> <a href="#">Über uns</a></li>
+                        <li> <a href="#">Bestseller</a></li>
+                        <li> <a href="#">Neuheiten</a></li>
+                        <li> <a href="#">Blog</a></li>
                     </ul>
                 </aside>
                 <aside class="col-sm-3 col-md-2">
                     <h6 class="title">Service</h6>
                     <ul class="list-unstyled">
-                        <li> <a href="#">*FAQ</a></li>
-                        <li> <a href="#">*Rückerstattung</a></li>
-                        <li> <a href="#">*AGB</a></li>
-                        <li> <a href="#">*Impressum</a></li>
+                        <li> <a href="#">FAQ</a></li>
+                        <li> <a href="#">Rückerstattung</a></li>
+                        <li> <a href="#">AGB</a></li>
+                        <li> <a href="#">Impressum</a></li>
                     </ul>
                 </aside>
                 <aside class="col-sm-3  col-md-2">
@@ -33,8 +33,8 @@
                         {% if user.is_authenticated or shopuser.is_authenticated %}
                             <li> <a href="{% url 'user' %}">Konto</a></li>
                             <li> <a href="{% url 'upload' %}">Bild hochladen</a></li>
-                            <li> <a href="#">*Meine Bestellungen</a></li>
-                            <li> <a href="#">*Meine Produkte</a></li>
+                            <li> <a href="#">Meine Bestellungen</a></li>
+                            <li> <a href="#">Meine Produkte</a></li>
                             <li> <a href="{% url 'logout' %}">Ausloggen</a></li>
                         {% else %}
                             <li> <a href="{% url 'login' %}">Anmelden</a></li>

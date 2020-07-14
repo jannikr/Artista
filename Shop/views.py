@@ -10,6 +10,8 @@ from .forms import SearchForm, ProductForm, CommentForm
 from .utils import render_to_pdf
 from Shop.models import Product, Comment
 
+''' Home View '''
+
 
 def home(request):
     if request.method == 'POST':
@@ -22,7 +24,12 @@ def home(request):
             products_found = Product.objects.filter(description__contains=search_string_text)
         elif search_string_category == "Bewertung":
             # To Do
-            products_found = Product.objects.filter(title__contains=search_string_text)
+            products_found = Product.objects.all()
+            ids = []
+            for product in products_found:
+                if (product.get_average() == int(search_string_text)):
+                    ids.append(product.id)
+            products_found = Product.objects.filter(id__in=ids)
             print("-------------------------------------------------")
             print("IMPORTANT:")
             print("Rate function not implemented yet: Shop/views.py")
@@ -33,12 +40,11 @@ def home(request):
             else:
                 products_found = Product.objects.filter(creator__instagram_handle__contains='@' + search_string_text)
 
-
         form_in_function_based_view = SearchForm()
         context = {'form': form_in_function_based_view,
                    'all_the_products': products_found,
                    'show_results': True}
-        return render(request,'Shop/home.html', context)
+        return render(request, 'Shop/home.html', context)
 
     else:
         form_in_function_based_view = SearchForm()
@@ -49,9 +55,16 @@ def home(request):
         return render(request, 'Shop/home.html', context)
 
 
+''' Cart View '''
+
+
 def cart(request):
     context = {}
     return render(request, 'Shop/cart.html', context)
+
+
+''' Product Add '''
+
 
 class ProductCreateView(CreateView):
     model = Product
@@ -63,9 +76,17 @@ class ProductCreateView(CreateView):
         form.instance.creator = self.request.user
         return super().form_valid(form)
 
+
+''' Checkout View '''
+
+
 def checkout(request):
     context = {}
     return render(request, 'Shop/checkout.html', context)
+
+
+''' Detail View '''
+
 
 def detail(request, **kwargs):
     product_id = kwargs['pk']
@@ -94,7 +115,6 @@ def detail(request, **kwargs):
     for comment in comments:
         comments_flags = comment.get_flags_count()
 
-    # comment = Comment.objects.get(pk=1)
     context = {'that_one_product': that_one_product,
                'comments_for_that_one_product': comments,
                'comments_downvotes': comments_downvotes,
@@ -104,6 +124,10 @@ def detail(request, **kwargs):
                'avg': that_one_product.get_average(),
                'comment_form': CommentForm}
     return render(request, 'Shop/detail.html', context)
+
+
+''' PDF View '''
+
 
 class GeneratePdf(View):
     def get(self, request, *args, **kwargs):
@@ -115,6 +139,11 @@ class GeneratePdf(View):
         pdf = render_to_pdf('Shop/utils/productinfo.html', context)
         return HttpResponse(pdf, content_type='application/pdf')
 
+
+''' Product Search View '''
+
+# old code? [JNR]
+
 def product_search(request):
     if request.method == 'POST':
         search_string_text = request.POST['title']
@@ -124,7 +153,7 @@ def product_search(request):
         context = {'form': form_in_function_based_view,
                    'products_found': products_found,
                    'show_results': True}
-        return render(request,'Shop/home.html', context)
+        return render(request, 'Shop/home.html', context)
 
     else:
         form_in_function_based_view = SearchForm()
@@ -132,13 +161,21 @@ def product_search(request):
                    'show_results': False}
         return render(request, 'Shop/home.html', context)
 
+
+''' Vote Product View '''
+
+
 def vote(request, pk: str, rating: str):
     product = Product.objects.get(id=int(pk))
     user = request.user
     product.vote(user, rating)
     return redirect('detail', pk=pk)
 
-def comment_vote(request, pk: int, cid:int, up_or_down_or_flag: str):
+
+''' Vote Comment View '''
+
+
+def comment_vote(request, pk: int, cid: int, up_or_down_or_flag: str):
     product = Product.objects.get(id=int(pk))
     comment = Comment.objects.get(id=int(cid))
     user = request.user

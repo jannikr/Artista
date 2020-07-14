@@ -12,6 +12,13 @@
 
     function clickedItem(e) {
         var targetName = e.target.innerText;
+        if (targetName != "Bewertung"){
+            var element = document.getElementById("myplaceholder");
+            element.setAttribute("placeholder", "Suchen...")
+        } else {
+            var element = document.getElementById("myplaceholder");
+            element.setAttribute("placeholder", "Zahl eingeben: 1 - 5")
+        }
         var element = document.getElementById("default_value");
         element.innerText = targetName;
         var input = document.getElementById("myCategory");
@@ -33,19 +40,9 @@
         </div>
         <form method="post" class="search_field">
             {% csrf_token %}
-            <input type="text" class="input" name="title" placeholder="Suchen...">
+            <input type="text" class="input" name="title" id="myplaceholder" placeholder="Suchen...">
             <input type="hidden" id="myCategory" value="Titel" maxlength="100" class="form-control" name="myCategory"/>
             <i class="fa fa fa-search" onclick="this.parentNode.submit();"></i>
         </form>
     </div>
 </div>
-
-<!-- This form works fine for testing!
-<br>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Search</button>
-</form>
-
--->
