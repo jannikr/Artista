@@ -1,10 +1,13 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
 # Create your views here.
+from django.template.loader import get_template
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView
 
 from .forms import SearchForm, ProductForm, CommentForm
+from .utils import render_to_pdf
 from Shop.models import Product, Comment
 
 
@@ -101,6 +104,16 @@ def detail(request, **kwargs):
                'avg': that_one_product.get_average(),
                'comment_form': CommentForm}
     return render(request, 'Shop/detail.html', context)
+
+class GeneratePdf(View):
+    def get(self, request, *args, **kwargs):
+        product_id = kwargs['pk']
+        that_one_product = Product.objects.get(id=product_id)
+        context = {
+            'that_one_product': that_one_product,
+        }
+        pdf = render_to_pdf('Shop/utils/productinfo.html', context)
+        return HttpResponse(pdf, content_type='application/pdf')
 
 def product_search(request):
     if request.method == 'POST':
