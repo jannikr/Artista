@@ -30,10 +30,6 @@ def home(request):
                 if (product.get_average() == int(search_string_text)):
                     ids.append(product.id)
             products_found = Product.objects.filter(id__in=ids)
-            print("-------------------------------------------------")
-            print("IMPORTANT:")
-            print("Rate function not implemented yet: Shop/views.py")
-            print("-------------------------------------------------")
         elif search_string_category == "Instagram Name":
             if '@' in search_string_text:
                 products_found = Product.objects.filter(creator__instagram_handle__contains=search_string_text)
