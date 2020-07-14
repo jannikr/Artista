@@ -83,11 +83,11 @@ def detail(request, **kwargs):
     for comment in comments:
         comments_downvotes = comment.get_downvotes_count()
 
-    comment_upvotes = 0
+    comments_upvotes = 0
     for comment in comments:
         comments_upvotes = comment.get_upvotes_count()
 
-    comment_flags = 0
+    comments_flags = 0
     for comment in comments:
         comments_flags = comment.get_flags_count()
 
