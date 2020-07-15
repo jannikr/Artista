@@ -167,7 +167,6 @@ class Comment(models.Model):
 
     def vote(self, user, up_or_down_or_flag):
         # TODO only one vote
-        # TODO votes for all comments! (bug)
         print(self)
         Vote_Comment.objects.create(up_or_down_or_flag=up_or_down_or_flag,
                                     shopUser=user,

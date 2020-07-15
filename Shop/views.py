@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 # Create your views here.
@@ -5,6 +6,7 @@ from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import SearchForm, ProductForm, CommentForm
 from .utils import render_to_pdf
@@ -172,6 +174,7 @@ def product_search(request):
 ''' Vote Product View '''
 
 
+@login_required(login_url='login')
 def vote(request, pk: str, rating: str):
     product = Product.objects.get(id=int(pk))
     user = request.user
@@ -182,6 +185,7 @@ def vote(request, pk: str, rating: str):
 ''' Vote Comment View '''
 
 
+@login_required(login_url='login')
 def comment_vote(request, pk: int, cid: int, up_or_down_or_flag: str):
     product = Product.objects.get(id=int(pk))
     comment = Comment.objects.get(id=int(cid))
