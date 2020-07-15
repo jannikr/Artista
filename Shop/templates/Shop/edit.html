@@ -1,0 +1,35 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+{% block logged_in_content %}
+
+    <h2 class="text-center mt-4">Produkt bearbeiten</h2>
+
+    {% if not can_update %}
+
+        <p class="text-center">Du bist nicht authorisiert dieses Produkt zu bearbeiten.</p>
+
+    {% endif %}
+
+
+        {% if can_update %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary btn-sm" type="submit">Bearbeiten</button>
+            </form>
+            <br>
+
+        {% endif %}
+
+
+{% endblock logged_in_content %}
+
+    </div>
+
+{% endblock content %}

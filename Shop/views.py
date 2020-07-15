@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import SearchForm, ProductForm, CommentForm
@@ -192,3 +192,20 @@ def comment_vote(request, pk: int, cid: int, up_or_down_or_flag: str):
     user = request.user
     comment.vote(user, up_or_down_or_flag)
     return redirect('detail', pk=pk)
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'Shop/edit.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductUpdateView, self).get_context_data(**kwargs)
+        user = self.request.user
+        can_update = False
+
+        if not user.is_anonymous and self.request.user == self.get_object().creator:
+            can_update = True
+            context['can_update'] = can_update
+            return context
