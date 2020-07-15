@@ -1,0 +1,37 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+{% block logged_in_content %}
+
+    <h2 class="text-center mt-4">Edit Comment</h2>
+
+    {% if not can_delete %}
+
+        <p class="text-center">Du bist nicht authorisiert diesen Bereich zu bearbeiten.</p>
+
+    {% endif %}
+
+
+        {% if can_delete %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Bearbeiten</button>
+            </form>
+            <br>
+
+        {% else %}
+            {{ comment.text }}
+        {% endif %}
+
+
+{% endblock logged_in_content %}
+
+    </div>
+
+{% endblock content %}
