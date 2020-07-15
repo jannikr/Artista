@@ -102,6 +102,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Write Comment -->
+
+    {% if can_comment %}
+
     <div class="album py-1 bg-light">
         <div class="container">
             <h5 class="mt-4">Schreibe einen Kommentar zu diesem Produkt:</h5>
@@ -116,10 +121,15 @@
         </div>
     </div>
 
+    {% endif %}
+
     <!-- Kommentare -->
 
     <div class="container">
         <h5 class="mt-4">Kommentare:</h5>
+        {% if not comments_for_that_one_product|length > 0 %}
+            <p>Aktuell gibt es noch keine Kommentare</p>
+        {% endif %}
         {% for comment in comments_for_that_one_product%}
             <div class="media comment-box">
                 <div class="media-left">

@@ -119,6 +119,16 @@ def detail(request, **kwargs):
                'number_of_votes': that_one_product.get_number_of_votes(),
                'avg': that_one_product.get_average(),
                'comment_form': CommentForm}
+
+    can_comment = False
+    user = request.user
+    if not user.is_anonymous:
+        can_comment = True
+        # Add if shopUser has its own types
+        # shopUser = ShopUser.objects.get(user=user)
+        # can_delete = shopUser.candelete()
+        context['can_comment'] = can_comment
+
     return render(request, 'Shop/detail.html', context)
 
 
