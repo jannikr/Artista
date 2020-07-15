@@ -1,52 +1,71 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <title>Produkt Info</title>
-        <style type="text/css">
-            body {
-                font-weight: 200;
-                font-size: 14px;
-            }
-            .header {
-                font-size: 20px;
-                font-weight: 100;
-                text-align: center;
-                color: #007cae;
-            }
-            .title {
-                font-size: 22px;
-                font-weight: 100;
-               /* text-align: right;*/
-               padding: 10px 20px 0px 20px;
-            }
-            .title span {
-                color: #007cae;
-            }
-            .details {
-                padding: 10px 20px 0px 20px;
-                text-align: left !important;
-                /*margin-left: 40%;*/
-            }
-            .hrItem {
-                border: none;
-                height: 1px;
-                /* Set the hr color */
-                color: #333; /* old IE */
-                background-color: #fff; /* Modern Browsers */
-            }
-        </style>
-    </head>
-    <body>
-        <div class='wrapper'>
-            <div class='header'>
-                <p class='title'>{{ that_one_product.title }}</p>
-            </div>
-        <div>
+<head>
+    <title>Produkt Info</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+
+        .header {
+            font-size: 25px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+
+        .title {
+            font-size: 30px;
+            font-weight: 100;
+            /* text-align: right;*/
+            color: #007bff;
+        }
+
+        .logo {
+            position: absolute;
+            display: inline;
+            top: 0;
+            left: 0;
+        }
+
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+            /*margin-left: 40%;*/
+        }
+
+        .image {
+            width: 677px;
+        }
+
+        .footer {
+            font-size: 11px;
+            color: #62656e;
+            text-align: center;
+            padding-top: 85px;
+        }
+
+    </style>
+</head>
+<body>
+<img class="logo" src="../static/images/Artista_Logo.png">
+<div class='wrapper'>
+    <div class='header'>
+        <p class='title'>{{ that_one_product.title }}</p>
+        <img class='image' src="http://127.0.0.1:8000{{ that_one_product.image.url }}">
+    </div>
+    <div>
         <div class='details'>
-            Beschreibung: <br><br>{{ that_one_product.description}} <br><br>
-            Preis:<br><br> {{ that_one_product.price }} Euro
-            <hr class='hrItem' />
+            <p><strong>Kategorie:</strong> {{ that_one_product.get_category_display }}</p>
+            <p><strong>Creator:</strong> @{{ that_one_product.creator }}</p>
+            <p><strong>Bewertung:</strong> {{ that_one_product.get_average }} / 5.0</p>
+            <p><strong>Beschreibung:</strong> {{ that_one_product.description}}</p>
+            <p><strong>Preis:</strong> {{ that_one_product.price }} Euro</p>
+        </div>
+        <div class="footer">
+            <p>www.artista.com</br>Der Marktplatz für deine Kunstwerke</p>
         </div>
     </div>
-    </body>
+</body>
 </html>
