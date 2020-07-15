@@ -99,17 +99,17 @@ def detail(request, **kwargs):
             print(form.errors)
 
     comments = Comment.objects.filter(product=that_one_product)
-    comments_downvotes = 0
+    comments_downvotes = []
     for comment in comments:
-        comments_downvotes = comment.get_downvotes_count()
+        comments_downvotes.append(comment.get_downvotes_count())
 
-    comments_upvotes = 0
+    comments_upvotes = []
     for comment in comments:
-        comments_upvotes = comment.get_upvotes_count()
+        comments_upvotes.append(comment.get_upvotes_count())
 
-    comments_flags = 0
+    comments_flags = []
     for comment in comments:
-        comments_flags = comment.get_flags_count()
+        comments_flags.append(comment.get_flags_count())
 
     context = {'that_one_product': that_one_product,
                'comments_for_that_one_product': comments,
@@ -137,6 +137,7 @@ class GeneratePdf(View):
 
 
 ''' Product Search View '''
+
 
 # old code? [JNR]
 

@@ -1,6 +1,7 @@
 from django.db import models
 from Profile.models import ShopUser
 
+
 # Create your models here.
 class Product(models.Model):
     PRODUCT_CATEGORIES = [
@@ -78,8 +79,9 @@ class Product(models.Model):
     # get average
 
     def get_average(self):
-        zaehler =self.get_onestar_count() * 1 + self.get_twostar_count() * 2 + self.get_threestar_count() * 3 + self.get_fourstar_count() * 4 + self.get_fivestar_count() * 5
-        nenner = ((self.get_onestar_count() + self.get_twostar_count() + self.get_threestar_count() + self.get_fourstar_count() + self.get_fivestar_count()))
+        zaehler = self.get_onestar_count() * 1 + self.get_twostar_count() * 2 + self.get_threestar_count() * 3 + self.get_fourstar_count() * 4 + self.get_fivestar_count() * 5
+        nenner = ((
+                self.get_onestar_count() + self.get_twostar_count() + self.get_threestar_count() + self.get_fourstar_count() + self.get_fivestar_count()))
         if (nenner != 0):
             avg = zaehler / nenner
         else:
@@ -87,7 +89,7 @@ class Product(models.Model):
         return avg
 
     def get_number_of_votes(self):
-        return(len(Vote.objects.filter(product=self)))
+        return (len(Vote.objects.filter(product=self)))
 
     def vote(self, user, rating):
         # when the user has not voted before
@@ -102,7 +104,7 @@ class Product(models.Model):
             # delete old value -> no duplicates
             Vote.objects.get(shopUser=user, product=self).delete()
             # create the new value
-            Vote.objects.create(rating=rating,shopUser=user,product=self)
+            Vote.objects.create(rating=rating, shopUser=user, product=self)
 
 
 class Vote(models.Model):
@@ -125,7 +127,6 @@ class Vote(models.Model):
         return self.rating + ' on ' + self.product.title + ' by ' + self.shopUser.username
 
 
-
 class Comment(models.Model):
     text = models.TextField(max_length=500)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -144,34 +145,34 @@ class Comment(models.Model):
             return self.text
 
     def get_downvotes(self):
-        downvotes = Vote_Comment.objects.filter(up_or_down_or_flag='D')
+        downvotes = Vote_Comment.objects.filter(up_or_down_or_flag='D', comment=self)
         return downvotes
 
     def get_downvotes_count(self):
         return len(self.get_downvotes())
 
     def get_upvotes(self):
-        upvotes = Vote_Comment.objects.filter(up_or_down_or_flag='U')
+        upvotes = Vote_Comment.objects.filter(up_or_down_or_flag='U', comment=self)
         return upvotes
 
     def get_upvotes_count(self):
         return len(self.get_upvotes())
 
     def get_flags(self):
-        flags = Vote_Comment.objects.filter(up_or_down_or_flag='F')
+        flags = Vote_Comment.objects.filter(up_or_down_or_flag='F', comment=self)
         return flags
 
     def get_flags_count(self):
         return len(self.get_flags())
 
     def vote(self, user, up_or_down_or_flag):
-        # To Do
-        # only one vote
-        vote = Vote_Comment.objects.create(up_or_down_or_flag=up_or_down_or_flag,
-                                       shopUser=user,
-                                       comment=self
-                                       )
-
+        # TODO only one vote
+        # TODO votes for all comments! (bug)
+        print(self)
+        Vote_Comment.objects.create(up_or_down_or_flag=up_or_down_or_flag,
+                                    shopUser=user,
+                                    comment=self
+                                    )
 
     def __str__(self):
         return self.get_comment_prefix() + ' (' + self.user.username + ')'
@@ -188,11 +189,12 @@ class Vote_Comment(models.Model):
     ]
 
     up_or_down_or_flag = models.CharField(max_length=1,
-                                  choices=VOTE_TYPES,null=True,
-                                  )
+                                          choices=VOTE_TYPES, null=True,
+                                          )
     timestamp = models.DateTimeField(auto_now_add=True)
     shopUser = models.ForeignKey(ShopUser, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return str(self.up_or_down_or_flag) + ' on ' + self.comment.get_comment_prefix() + ' by ' + self.shopUser.username
+        return str(
+            self.up_or_down_or_flag) + ' on ' + self.comment.get_comment_prefix() + ' by ' + self.shopUser.username

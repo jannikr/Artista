@@ -1,6 +1,7 @@
 {% extends 'Shop/base.html' %}
 
 {% load static %}
+{% load custom_filter %}
 
 {% block content %}
 
@@ -119,7 +120,7 @@
 
     <div class="container">
         <h5 class="mt-4">Kommentare:</h5>
-        {% for comment in comments_for_that_one_product %}
+        {% for comment in comments_for_that_one_product%}
             <div class="media comment-box">
                 <div class="media-left">
                     <a href="#">
@@ -132,7 +133,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="media-heading col"><strong>{{ comment.user.username }}</strong> am {{ comment.timestamp }}</div>
-                            <div class="col mycustom-report" style="text-align: right"><a class="voting" href="comment/{{ comment.id }}/vote-comment/U/"><i class="fa fa fa-thumbs-up fa-sm"></i></a> {{ comments_upvotes }} <a class="voting" href="comment/{{ comment.id }}/vote-comment/D/"><i class="fa fa fa-thumbs-down fa-sm"></i></a> {{ comments_downvotes }} <a class="voting" href="comment/{{ comment.id }}/vote-comment/F/"><i class="fa fa fa-flag fa-sm"></i></a> {{ comments_flags }}</div>
+                            <div class="col mycustom-report" style="text-align: right"><a class="voting" href="comment/{{ comment.id }}/vote-comment/U/"><i class="fa fa fa-thumbs-up fa-sm"></i></a> {{ comments_upvotes|get_at_index:forloop.counter0 }} <a class="voting" href="comment/{{ comment.id }}/vote-comment/D/"><i class="fa fa fa-thumbs-down fa-sm"></i></a> {{ comments_downvotes|get_at_index:forloop.counter0 }} <a class="voting" href="comment/{{ comment.id }}/vote-comment/F/"><i class="fa fa fa-flag fa-sm"></i></a> {{ comments_flags|get_at_index:forloop.counter0 }}</div>
                         </div>
                     </div>
                     <p>{{ comment.text }}</p>

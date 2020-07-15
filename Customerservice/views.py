@@ -14,8 +14,16 @@ class CommentsFlagView(ListView):
     template_name = 'comments-flag.html'
 
     def get_context_data(self, **kwargs):
-        # TODO get only flagged comments
         context = super(CommentsFlagView, self).get_context_data(**kwargs)
+
+        ids = []
+        comments = Comment.objects.all()
+        for comment in comments:
+            print(comment)
+            print(comment.get_flags_count())
+            if comment.get_flags_count() > 0:
+                ids.append(comment.id)
+
         can_delete = False
         user = self.request.user
         if not user.is_anonymous:
@@ -24,6 +32,7 @@ class CommentsFlagView(ListView):
             # shopUser = ShopUser.objects.get(user=user)
             # can_delete = shopUser.candelete()
             context['can_delete'] = can_delete
+            context['comments_filter'] = Comment.objects.filter(id__in=ids)
             return context
 
     def post(self, request, *args, **kwargs):
