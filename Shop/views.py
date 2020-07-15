@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import SearchForm, ProductForm, CommentForm
 from .utils import render_to_pdf
-from Shop.models import Product, Comment
+from Shop.models import Product, Comment, Order
 
 ''' Home View '''
 
@@ -39,9 +39,10 @@ def home(request):
                 products_found = Product.objects.filter(creator__instagram_handle__contains='@' + search_string_text)
 
         form_in_function_based_view = SearchForm()
+
         context = {'form': form_in_function_based_view,
                    'all_the_products': products_found,
-                   'show_results': True}
+                   'show_results': True,}
         return render(request, 'Shop/home.html', context)
 
     else:
@@ -49,7 +50,7 @@ def home(request):
         all_the_products = Product.objects.all()
         context = {'form': form_in_function_based_view,
                    'all_the_products': all_the_products,
-                   'show_results': True}
+                   'show_results': True,}
         return render(request, 'Shop/home.html', context)
 
 
@@ -57,7 +58,14 @@ def home(request):
 
 
 def cart(request):
-    context = {}
+    if request.user.is_authenticated:
+        shopUser = request.user
+        order, created = Order.objects.get_or_create(shopUser=shopUser, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total': 0}
+    context = {'items': items, 'order': order}
     return render(request, 'Shop/cart.html', context)
 
 
@@ -113,6 +121,7 @@ def detail(request, **kwargs):
     for comment in comments:
         comments_flags.append(comment.get_flags_count())
 
+
     context = {'that_one_product': that_one_product,
                'comments_for_that_one_product': comments,
                'comments_downvotes': comments_downvotes,
@@ -130,6 +139,10 @@ def detail(request, **kwargs):
         # shopUser = ShopUser.objects.get(user=user)
         # can_delete = shopUser.candelete()
         context['can_comment'] = can_comment
+
+    if user == that_one_product.creator:
+        can_update = True
+        context['can_update'] = can_update
 
     return render(request, 'Shop/detail.html', context)
 
@@ -192,6 +205,20 @@ def comment_vote(request, pk: int, cid: int, up_or_down_or_flag: str):
     user = request.user
     comment.vote(user, up_or_down_or_flag)
     return redirect('detail', pk=pk)
+
+
+''' Add to cart '''
+
+
+@login_required(login_url='login')
+def addtocart(request, pk: int):
+    product = Product.objects.get(id=int(pk))
+    quantity = 1
+    Order.objects.all()[0].newItem(product, quantity)
+    return redirect('detail', pk=pk)
+
+
+''' Update Product '''
 
 
 class ProductUpdateView(UpdateView):

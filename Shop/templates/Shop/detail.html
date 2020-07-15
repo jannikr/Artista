@@ -94,10 +94,12 @@
 
                 <div class="d-flex">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary mr-1">Hinzufügen</button>
+                        {% if can_update %}
+                        <button type="button" class="btn btn-sm btn-outline-secondary mr-1">Bearbeiten</button>
+                        {% endif %}
+                        <a href="{{ product.id }}pdf/"><button type="button" class="btn btn-sm btn-outline-secondary">PDF</button></a>
                     </div>
-                    <a style="margin-left: 10px" href="{{ product.id }}pdf/"><button type="button" class="btn btn-sm btn-outline-secondary">PDF</button></a>
                 </div>
             </div>
         </div>

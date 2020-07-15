@@ -134,3 +134,5 @@ AUTH_USER_MODEL = 'Profile.ShopUser'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+TEMPLATES[0]['OPTIONS']['context_processors'].append("Shop.context_processors.cartitems_processor")

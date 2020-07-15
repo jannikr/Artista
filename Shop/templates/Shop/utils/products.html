@@ -15,9 +15,9 @@
                                 {{ product.creator.instagram_handle }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="detail/{{ product.id }}/"><button type="button" class="btn btn-sm btn-outline-secondary">Ansehen</button></a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Bearbeiten</button>
+                                    <a href="detail/{{ product.id }}/"><button type="button" class="btn btn-sm btn-outline-secondary mr-1">Ansehen</button></a>
+
+                                    <a href="add/{{ product.id }}/"> <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button></a>
                                 </div>
                                 <medium class="text-muted">{{ product.price }}€</medium>
                             </div>

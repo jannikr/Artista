@@ -24,7 +24,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-          <a class="btn btn-outline-primary" href="{% url 'cart' %}"><i class="fa fa fa-shopping-cart fa-sm"></i> Warenkorb | 0</a>
+          <a class="btn btn-outline-primary" href="{% url 'cart' %}"><i class="fa fa fa-shopping-cart fa-sm"></i> Warenkorb | {{ cartItems }}</a>
       </li>
       {% if user.is_authenticated or shopuser.is_authenticated %}
       <li class="nav-item px-3">
