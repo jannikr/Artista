@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('Profile.urls')),
     path('', include('Shop.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('customerservice/', include('Customerservice.urls')),
 ]
 
 if settings.DEBUG:

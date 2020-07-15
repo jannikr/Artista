@@ -29,6 +29,7 @@ class Product(models.Model):
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
 
+    # TODO fix onestar bug
     # one stars
 
     def get_onestars(self):
