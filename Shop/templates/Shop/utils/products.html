@@ -7,7 +7,7 @@
             {% for product in all_the_products %}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a href="detail/{{ product.id }}/"><img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap"></a>
+                        <a href="detail/{{ product.id }}/"><img  style="width: 80%; margin-left: 10%; margin-bottom: 10%; margin-top: 10% " class="img-show" src="{{ product.image.url }}" alt="Card image cap"></a>
                         <div class="card-body">
                             <h5 class="card-title">{{ product.title }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ product.get_category_display }}</h6>
