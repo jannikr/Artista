@@ -96,7 +96,7 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-sm btn-outline-secondary mr-1">Hinzufügen</button>
                         {% if can_update %}
-                        <button type="button" class="btn btn-sm btn-outline-secondary mr-1">Bearbeiten</button>
+                        <a href="{{ product.id }}update/"><button type="button" class="btn btn-sm btn-outline-secondary mr-1">Bearbeiten</button></a>
                         {% endif %}
                         <a href="{{ product.id }}pdf/"><button type="button" class="btn btn-sm btn-outline-secondary">PDF</button></a>
                     </div>
