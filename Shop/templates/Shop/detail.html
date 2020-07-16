@@ -90,7 +90,7 @@
                     <a class="collapsed" data-toggle="collapse" href="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary"></a>
                 </div>
                 <br>
-                <p>{{ that_one_product.price }}€</p>
+                <p>{{ that_one_product.price | floatformat:"0" }}€</p>
 
                 <div class="d-flex">
                     <div class="btn-group">

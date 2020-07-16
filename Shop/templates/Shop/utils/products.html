@@ -19,7 +19,7 @@
 
                                     <a href="add/{{ product.id }}/"> <button type="button" class="btn btn-sm btn-outline-secondary">Hinzufügen</button></a>
                                 </div>
-                                <medium class="text-muted">{{ product.price }}€</medium>
+                                <medium class="text-muted">{{ product.price | floatformat:"0" }}€</medium>
                             </div>
                         </div>
                     </div>
