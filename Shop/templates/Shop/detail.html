@@ -94,7 +94,7 @@
 
                 <div class="d-flex">
                     <div class="btn-group">
-                        <a href="add/{{ product.id }}/"><button type="button" class="btn btn-sm btn-outline-secondary mr-1">Hinzufügen</button></a>
+                        <a href="add{{ product.id }}/"><button type="button" class="btn btn-sm btn-outline-secondary mr-1">Hinzufügen</button></a>
                         {% if can_update %}
                         <a href="{{ product.id }}update/"><button type="button" class="btn btn-sm btn-outline-secondary mr-1">Bearbeiten</button></a>
                         {% endif %}

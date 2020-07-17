@@ -7,6 +7,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name="checkout"),
     path('upload/', views.ProductCreateView.as_view(), name="upload"),
     path('add/<int:pk>/', views.addtocart, name='addtocart'),
+    path('detail/<int:pk>/add/', views.addtocart, name='addtocart'),
     path('detail/<int:pk>/', views.detail, name='detail'),
     path('detail/<int:pk>/update/', views.ProductUpdateView.as_view(), name='update'),
     path('detail/<int:pk>/pdf/', views.GeneratePdf.as_view(), name='pdf'),
