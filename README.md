@@ -36,3 +36,9 @@ A shopping cart object is only created when the first product has been added to 
 In the shopping cart, all products are added together depending on the respective quantity so that the total costs are displayed correctly.
 
 ![alt text](https://github.com/jannikr/E_Commerce/blob/master/static/images/cart.png)
+
+## UML
+
+This UML-Diagram shows very simple the structure of the app. It is not complete, but should give a rough impression of the architecture.
+
+<img src="https://github.com/jannikr/E_Commerce/blob/master/static/images/uml.png" width="500" />
